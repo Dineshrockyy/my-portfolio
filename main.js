@@ -27,6 +27,8 @@ function sendmail(){
     if(params.name==="" || params.email==="" || params.message===""){
         document.getElementById("denied").classList.remove("hidden")
         document.getElementById("success").classList.add("hidden")
+    }else if(params.name.length >15){
+        document.getElementById("showlength").classList.remove("hidden")
     }else{
         emailjs.send(service_id,template_id,params)
 .then(
@@ -34,6 +36,9 @@ function sendmail(){
         document.getElementById("name").value=""
         document.getElementById("email").value=""
         document.getElementById("text").value=""
+        document.getElementById("count").classList.add("hidden")
+        document.getElementById("showlength").classList.add("hidden")
+        document.getElementById("maxium").classList.add("hidden")
         document.getElementById("success").classList.remove("hidden")
         document.getElementById("denied").classList.add("hidden")
         console.log(res)
@@ -43,3 +48,10 @@ function sendmail(){
 .catch((err)=>{console.log(err)})
 }
     }
+  
+const handelname=()=>{
+    document.getElementById("count").classList.remove("hidden")
+    document.getElementById("maxium").classList.remove("hidden")
+    const name=document.getElementById("name").value
+    document.getElementById("count").innerText=name.length
+}
